@@ -66,6 +66,7 @@ def main(argv=None):
 			mqtt_client = None
 		
 		led = LED(LED_PIN)
+		led.on()
 		print("LED Loaded")
 		button = Button(BUTTON_PIN)
 		print("Button Loaded")
@@ -123,4 +124,5 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
