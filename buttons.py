@@ -66,8 +66,11 @@ def main(argv=None):
 			mqtt_client = None
 		
 		led = LED(LED_PIN)
+		print("LED Loaded")
 		button = Button(BUTTON_PIN)
+		print("Button Loaded")
 		rbutton = Button(25)
+		print("Button Loaded")
 		
 		encoder = RotaryEncoder(ENCODER_DT,ENCODER_CLK)
 
@@ -120,3 +123,4 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
