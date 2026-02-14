@@ -29,6 +29,8 @@ try:
 			print("Button 25 Pressed!")
 
 		print("looping")
+		input = GPIO.input(26)
+		print(input)
 		time.sleep(0.05) # debounce delay
 except KeyboardInterrupt:
 	GPIO.cleanup()
@@ -155,6 +157,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
