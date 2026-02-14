@@ -28,6 +28,8 @@ while True: # Run forever
 print("Finished waiting")
 sleep(10)
 
+GPIO.output(17, GPIO.LOW)
+
 GPIO.cleanup()
 
 try:
@@ -145,6 +147,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
