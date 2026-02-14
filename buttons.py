@@ -14,6 +14,7 @@ from time import sleep
 
 import RPi.GPIO as GPIO
 print("Imported GPIO")
+GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.OUT)
 GPIO.output(17, GPIO.HIGH)
@@ -144,6 +145,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
