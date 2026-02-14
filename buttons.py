@@ -10,6 +10,7 @@ Run with sudo on Raspberry Pi: `sudo python3 led_control.py`
 import sys
 import time
 import argparse
+from time import sleep
 
 try:
 	from gpiozero import LED, Button, RotaryEncoder
@@ -27,7 +28,7 @@ except Exception as exc:
 import RPi.GPIO as GPIO
 print("Imported GPIO")
 GPIO.output(LED_PIN, GPIO.HIGH)
-
+sleep(10)
 BUTTON_PIN = 26
 LED_PIN = 17
 BOUNCE_MS = 0.05  # debounce in seconds
@@ -128,6 +129,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
