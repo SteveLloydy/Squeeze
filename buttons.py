@@ -24,6 +24,7 @@ while True: # Run forever
     if GPIO.input(26) == GPIO.HIGH:
         print("Button was pushed!")
 
+print("Finished waiting")
 sleep(10)
 
 GPIO.cleanup()
@@ -143,6 +144,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
