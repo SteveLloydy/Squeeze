@@ -26,6 +26,8 @@ while True: # Run forever
 
 sleep(10)
 
+GPIO.cleanup()
+
 try:
 	from gpiozero import LED, Button, RotaryEncoder
 except Exception as exc:
@@ -141,6 +143,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
