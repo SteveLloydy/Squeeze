@@ -30,6 +30,7 @@ try:
 
 		print("looping")
 		input = GPIO.input(26)
+		input2 = GPIO.input(25)
 		print(input)
 		time.sleep(0.05) # debounce delay
 except KeyboardInterrupt:
@@ -157,6 +158,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
