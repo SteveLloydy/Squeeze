@@ -12,6 +12,11 @@ import time
 import argparse
 from time import sleep
 
+import RPi.GPIO as GPIO
+print("Imported GPIO")
+GPIO.output(17, GPIO.HIGH)
+sleep(10)
+
 try:
 	from gpiozero import LED, Button, RotaryEncoder
 except Exception as exc:
@@ -26,9 +31,7 @@ except Exception as exc:
 	raise SystemExit(1) from exc
 
 import RPi.GPIO as GPIO
-print("Imported GPIO")
-GPIO.output(LED_PIN, GPIO.HIGH)
-sleep(10)
+
 BUTTON_PIN = 26
 LED_PIN = 17
 BOUNCE_MS = 0.05  # debounce in seconds
@@ -129,6 +132,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
