@@ -17,6 +17,13 @@ print("Imported GPIO")
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.OUT)
 GPIO.output(17, GPIO.HIGH)
+
+GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+
+while True: # Run forever
+    if GPIO.input(26) == GPIO.HIGH:
+        print("Button was pushed!")
+
 sleep(10)
 
 try:
@@ -134,6 +141,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
