@@ -21,9 +21,13 @@ GPIO.output(17, GPIO.HIGH)
 
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 
-while True: # Run forever
-    if GPIO.input(26) == GPIO.HIGH:
-        print("Button was pushed!")
+try:
+	while True:
+		if GPIO.input(26) == GPIO.HIGH:
+			print("Button Pressed!")
+			time.sleep(0.05) # debounce delay
+except KeyboardInterrupt:
+	GPIO.cleanup()
 
 print("Finished waiting")
 sleep(10)
@@ -147,6 +151,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
