@@ -24,6 +24,10 @@ except Exception as exc:
 	print("paho-mqtt not available. Install with: pip3 install paho-mqtt")
 	raise SystemExit(1) from exc
 
+import RPi.GPIO as GPIO
+print("Imported GPIO")
+GPIO.output(LED_PIN, GPIO.HIGH)
+
 BUTTON_PIN = 26
 LED_PIN = 17
 BOUNCE_MS = 0.05  # debounce in seconds
@@ -124,5 +128,6 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
