@@ -13,15 +13,36 @@ import argparse
 from time import sleep
 
 import RPi.GPIO as GPIO
+
+CLK = 23
+DT = 24
+SW = 25
+BTN = 26
+LED = 17
+
 print("Imported GPIO")
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.OUT)
-GPIO.output(17, GPIO.HIGH)
+GPIO.setup(LED, GPIO.OUT)
+GPIO.output(LED, GPIO.HIGH)
 
-GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
-GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
-GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
+GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
+GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
+
+# Initial state
+last_clk_state = GPIO.input(CLK)
+last_dt_state = GPIO.input(DT)
+counter = 0
+
+def button_callback(channel):
+    """Handle button press."""
+    print("Button pressed! Counter reset to 0.")
+    global counter
+    counter = 0
+
+# Detect falling edge on button press
+GPIO.add_event_detect(SW, GPIO.FALLING, callback=button_callback, bouncetime=300)
 
 try:
 	while True:
@@ -30,8 +51,20 @@ try:
 		if GPIO.input(25) == GPIO.HIGH:
 			print("Button 25 Pressed!")
 
-		print(f"Button 23 {GPIO.input(23)}")
-		print(f"Button 24 {GPIO.input(24)}")
+		clk_state = GPIO.input(CLK)
+        dt_state = GPIO.input(DT)
+
+        # Detect rotation
+        if clk_state != last_clk_state:
+            if dt_state != clk_state:
+                counter += 1
+                direction = "CW"  # Clockwise
+            else:
+                counter -= 1
+                direction = "CCW"  # Counter-clockwise
+            print(f"Direction: {direction} | Counter: {counter}")
+
+        last_clk_state = clk_state
 
 		print("looping")
 		input = GPIO.input(26)
@@ -44,7 +77,7 @@ except KeyboardInterrupt:
 print("Finished waiting")
 sleep(10)
 
-GPIO.output(17, GPIO.LOW)
+GPIO.output(LED, GPIO.LOW)
 
 GPIO.cleanup()
 
@@ -163,6 +196,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
