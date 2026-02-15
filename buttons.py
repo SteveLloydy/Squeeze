@@ -35,15 +35,6 @@ last_clk_state = GPIO.input(CLK)
 last_dt_state = GPIO.input(DT)
 counter = 0
 
-def button_callback(channel):
-    """Handle button press."""
-    print("Button pressed! Counter reset to 0.")
-    global counter
-    counter = 0
-
-# Detect falling edge on button press
-GPIO.add_event_detect(SW, GPIO.FALLING, callback=button_callback, bouncetime=300)
-
 try:
 	while True:
 		if GPIO.input(26) == GPIO.HIGH:
@@ -79,3 +70,4 @@ sleep(10)
 GPIO.output(LED, GPIO.LOW)
 
 GPIO.cleanup()
+
