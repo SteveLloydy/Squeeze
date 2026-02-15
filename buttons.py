@@ -53,10 +53,9 @@ try:
 		else:
 			counter -= 1
 			direction = "CCW"  # Counter-clockwise
-            
         print(f"Direction: {direction} | Counter: {counter}")
-        last_clk_state = clk_state
-        print("looping")
+		last_clk_state = clk_state
+		print("looping")
 		input = GPIO.input(26)
         input2 = GPIO.input(25)
         print(input)
@@ -70,3 +69,4 @@ sleep(10)
 GPIO.output(LED, GPIO.LOW)
 
 GPIO.cleanup()
+
