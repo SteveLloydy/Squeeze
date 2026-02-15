@@ -55,9 +55,9 @@ try:
 			if dt_state != clk_state:
 				counter += 1
 				direction = "CW"  # Clockwise
-		else:
-			counter -= 1
-			direction = "CCW"  # Counter-clockwise
+			else:
+				counter -= 1
+				direction = "CCW"  # Counter-clockwise
 		print(f"Direction:{direction}|Counter:{counter}")
 		last_clk_state = clk_state
 		time.sleep(1) # debounce delay            
@@ -71,6 +71,7 @@ sleep(10)
 GPIO.output(LED, GPIO.LOW)
 
 GPIO.cleanup()
+
 
 
 
