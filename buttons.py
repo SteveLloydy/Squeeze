@@ -27,13 +27,16 @@ GPIO.output(LED, GPIO.HIGH)
 
 GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
-GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
-GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
+GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 
 # Initial state
 last_clk_state = GPIO.input(CLK)
 last_dt_state = GPIO.input(DT)
 counter = 0
+
+print(f"Last Clock State {last_clk_state}")
+print(f"Last DT State {last_dt_state}")
 
 try:
 	while True:
@@ -44,6 +47,8 @@ try:
         
 		clk_state = GPIO.input(CLK)
 		dt_state = GPIO.input(DT)
+		print(f"Clock State {clk_state}")
+		print(f"DT State {dt_state}")
 	
         # Detect rotation
 		if clk_state != last_clk_state:
@@ -55,11 +60,7 @@ try:
 			direction = "CCW"  # Counter-clockwise
 		print(f"Direction:{direction}|Counter:{counter}")
 		last_clk_state = clk_state
-		print("looping")
-		input = GPIO.input(26)
-		input2 = GPIO.input(25)
-		print(input)
-		time.sleep(0.05) # debounce delay            
+		time.sleep(1) # debounce delay            
         
 except KeyboardInterrupt:
 	GPIO.cleanup()
@@ -70,4 +71,5 @@ sleep(10)
 GPIO.output(LED, GPIO.LOW)
 
 GPIO.cleanup()
+
 
