@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+"""Listen to a button on GPIO26 and light an LED on GPIO17.
+
+Wiring assumed (BCM numbering):
+- Button between GPIO26 and GND (using internal pull-up)
+- LED (with resistor) between GPIO17 and GND (LED anode -> GPIO17)
+
+Run with sudo on Raspberry Pi: `sudo python3 led_control.py`
+"""
 import sys
 import time
 import argparse
@@ -41,7 +50,7 @@ try:
 			print("Button 26 Pressed!")
 		if GPIO.input(25) == GPIO.HIGH:
 			print("Button 25 Pressed!")
-
+        
 		clk_state = GPIO.input(CLK)
 		dt_state = GPIO.input(DT)
 	
@@ -53,13 +62,14 @@ try:
 		else:
 			counter -= 1
 			direction = "CCW"  # Counter-clockwise
-        print(f"Direction: {direction} | Counter: {counter}")
+		print(f"Direction:{direction}|Counter:{counter}")
 		last_clk_state = clk_state
 		print("looping")
 		input = GPIO.input(26)
-        input2 = GPIO.input(25)
-        print(input)
-        time.sleep(0.05) # debounce delay
+		input2 = GPIO.input(25)
+		print(input)
+		time.sleep(0.05) # debounce delay            
+        
 except KeyboardInterrupt:
 	GPIO.cleanup()
 
@@ -69,4 +79,3 @@ sleep(10)
 GPIO.output(LED, GPIO.LOW)
 
 GPIO.cleanup()
-
