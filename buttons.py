@@ -37,7 +37,7 @@ counter = 0
 
 print(f"Last Clock State {last_clk_state}")
 print(f"Last DT State {last_dt_state}")
-time.Sleep(2)
+time.sleep(2)
 try:
 	while True:
 		if GPIO.input(26) == GPIO.HIGH:
@@ -71,6 +71,7 @@ sleep(10)
 GPIO.output(LED, GPIO.LOW)
 
 GPIO.cleanup()
+
 
 
 
