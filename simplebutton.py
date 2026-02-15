@@ -26,13 +26,18 @@ GPIO.setup(LED, GPIO.OUT)
 GPIO.output(LED, GPIO.HIGH)
 
 GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 
 GPIO.output(LED, GPIO.HIGH)
 try:
 	while True:
 		if GPIO.input(BTN) == GPIO.HIGH:
 			print("Button BTN Pressed!")
-			GPIO.output(LED, GPIO.LOW)      
+			GPIO.output(LED, GPIO.LOW)
+			
+		if GPIO.input(SW) == GPIO.HIGH:
+			print("Button SW Pressed!") 
+			GPIO.output(LED, GPIO.HIGH)      
         
 except KeyboardInterrupt:
 	GPIO.cleanup()
