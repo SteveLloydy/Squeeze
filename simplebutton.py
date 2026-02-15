@@ -27,8 +27,8 @@ GPIO.output(LED, GPIO.HIGH)
 
 GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
-GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
-GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
+GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
 
 # Initial state
 last_clk_state = GPIO.input(CLK)
