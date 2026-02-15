@@ -52,8 +52,8 @@ try:
 			print("Button 25 Pressed!")
 
 		clk_state = GPIO.input(CLK)
-        dt_state = GPIO.input(DT)
-
+		dt_state = GPIO.input(DT)
+	
         # Detect rotation
         if clk_state != last_clk_state:
             if dt_state != clk_state:
@@ -196,6 +196,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
