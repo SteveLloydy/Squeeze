@@ -27,6 +27,13 @@ GPIO.output(LED, GPIO.HIGH)
 
 GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+
+# Initial state
+last_clk_state = GPIO.input(CLK)
+last_dt_state = GPIO.input(DT)
+counter = 0
 
 GPIO.output(LED, GPIO.HIGH)
 try:
@@ -37,7 +44,24 @@ try:
 			
 		if GPIO.input(SW) == GPIO.HIGH:
 			print("Button SW Pressed!") 
-			GPIO.output(LED, GPIO.HIGH)      
+			GPIO.output(LED, GPIO.HIGH)    
+
+		clk_state = GPIO.input(CLK)
+		dt_state = GPIO.input(DT)
+		print(f"Clock State {clk_state}")
+		print(f"DT State {dt_state}")
+		time.sleep(1)
+        # Detect rotation
+		if clk_state != last_clk_state:
+			if dt_state != clk_state:
+				counter += 1
+				direction = "CW"  # Clockwise
+			else:
+				counter -= 1
+				direction = "CCW"  # Counter-clockwise
+			print(f"Direction:{direction}|Counter:{counter}")
+		last_clk_state = clk_state
+		time.sleep(1) # debounce delay    
         
 except KeyboardInterrupt:
 	GPIO.cleanup()
