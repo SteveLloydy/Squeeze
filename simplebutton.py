@@ -61,7 +61,7 @@ try:
 				direction = "CCW"  # Counter-clockwise
 			print(f"Direction:{direction}|Counter:{counter}")
 		last_clk_state = clk_state
-		time.sleep(1) # debounce delay    
+		time.sleep(0.05) # debounce delay    
         
 except KeyboardInterrupt:
 	GPIO.cleanup()
