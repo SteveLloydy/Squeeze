@@ -53,7 +53,8 @@ try:
 		else:
 			counter -= 1
 			direction = "CCW"  # Counter-clockwise
-	print(f"Direction: {direction} | Counter: {counter}")
+
+	    print(f"Direction: {direction} | Counter: {counter}")
 
         last_clk_state = clk_state
 
