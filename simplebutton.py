@@ -50,8 +50,7 @@ try:
 		dt_state = GPIO.input(DT)
 		print(f"Clock State {clk_state}")
 		print(f"DT State {dt_state}")
-		time.sleep(1)
-        # Detect rotation
+		# Detect rotation
 		if clk_state != last_clk_state:
 			if dt_state != clk_state:
 				counter += 1
