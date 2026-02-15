@@ -55,14 +55,14 @@ try:
 		dt_state = GPIO.input(DT)
 	
         # Detect rotation
-        if clk_state != last_clk_state:
-            if dt_state != clk_state:
-                counter += 1
-                direction = "CW"  # Clockwise
-            else:
-                counter -= 1
-                direction = "CCW"  # Counter-clockwise
-            print(f"Direction: {direction} | Counter: {counter}")
+		if clk_state != last_clk_state:
+			if dt_state != clk_state:
+				counter += 1
+				direction = "CW"  # Clockwise
+		else:
+			counter -= 1
+			direction = "CCW"  # Counter-clockwise
+	print(f"Direction: {direction} | Counter: {counter}")
 
         last_clk_state = clk_state
 
@@ -196,6 +196,7 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	main()
+
 
 
 
