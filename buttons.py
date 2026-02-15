@@ -37,19 +37,19 @@ counter = 0
 
 print(f"Last Clock State {last_clk_state}")
 print(f"Last DT State {last_dt_state}")
-
+time.Sleep(2)
 try:
 	while True:
 		if GPIO.input(26) == GPIO.HIGH:
-			print("Button 26 Pressed!")
-		if GPIO.input(25) == GPIO.HIGH:
-			print("Button 25 Pressed!")
+			print("Button BTN Pressed!")
+		if GPIO.input(SW) == GPIO.HIGH:
+			print("Button SW Pressed!")
         
 		clk_state = GPIO.input(CLK)
 		dt_state = GPIO.input(DT)
 		print(f"Clock State {clk_state}")
 		print(f"DT State {dt_state}")
-	
+		time.sleep(1)
         # Detect rotation
 		if clk_state != last_clk_state:
 			if dt_state != clk_state:
@@ -71,5 +71,6 @@ sleep(10)
 GPIO.output(LED, GPIO.LOW)
 
 GPIO.cleanup()
+
 
 
