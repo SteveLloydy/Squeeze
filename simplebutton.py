@@ -26,7 +26,7 @@ GPIO.setup(LED, GPIO.OUT)
 GPIO.output(LED, GPIO.HIGH)
 
 GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
-# GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 
 GPIO.output(LED, GPIO.HIGH)
 try:
