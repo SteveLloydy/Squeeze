@@ -25,7 +25,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED, GPIO.OUT)
 GPIO.output(LED, GPIO.HIGH)
 
-GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
@@ -38,9 +38,10 @@ counter = 0
 print(f"Last Clock State {last_clk_state}")
 print(f"Last DT State {last_dt_state}")
 time.sleep(2)
+GPIO.output(LED, GPIO.HIGH)
 try:
 	while True:
-		if GPIO.input(26) == GPIO.HIGH:
+		if GPIO.input(BTN) == GPIO.HIGH:
 			print("Button BTN Pressed!")
 		if GPIO.input(SW) == GPIO.HIGH:
 			print("Button SW Pressed!")
@@ -71,6 +72,7 @@ sleep(10)
 GPIO.output(LED, GPIO.LOW)
 
 GPIO.cleanup()
+
 
 
 
