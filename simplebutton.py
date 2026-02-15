@@ -35,9 +35,9 @@ try:
 			print("Button BTN Pressed!")
 			GPIO.output(LED, GPIO.LOW)
 			
-		# if GPIO.input(SW) == GPIO.HIGH:
-		# 	print("Button SW Pressed!") 
-		# 	GPIO.output(LED, GPIO.HIGH)      
+		if GPIO.input(SW) == GPIO.HIGH:
+			print("Button SW Pressed!") 
+			GPIO.output(LED, GPIO.HIGH)      
         
 except KeyboardInterrupt:
 	GPIO.cleanup()
