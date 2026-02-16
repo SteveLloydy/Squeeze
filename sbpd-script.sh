@@ -55,14 +55,16 @@ LO5=KEY:KEY_ESC					# key-command for LONG press(back)
 LMS5=250
 
 # CMD="sbpd -v -f /home/tc/sbpd_commands.cfg \
-CMD="sbpd -v \
-b,$SW1,$SH1,2,0,$LO1,$LMS1 \	# b=button, $SW1=switchnumber of button-section
-b,$SW2,$SH2,2,0,$LO2,$LMS2 \
-b,$SW3,$SH3,2,0,$LO3,$LMS3 \
-b,$SW4,$SH4,2,0,$LO4,$LMS4 \
-b,$SW5,$SH5,2,0,$LO5,$LMS5 \
-e,22,27,VOLU,2 \				# e=encoder, 22 and 27 are GPIO
-e,23,24,KEY:KEY_UP-KEY_DOWN,4 "	# e=encoder, 23 and 24 are GPIO
+#CMD="sbpd -v \
+#b,$SW1,$SH1,2,0,$LO1,$LMS1 \	# b=button, $SW1=switchnumber of button-section
+#b,$SW2,$SH2,2,0,$LO2,$LMS2 \
+#b,$SW3,$SH3,2,0,$LO3,$LMS3 \
+#b,$SW4,$SH4,2,0,$LO4,$LMS4 \
+#b,$SW5,$SH5,2,0,$LO5,$LMS5 \
+#e,22,27,VOLU,2 \				# e=encoder, 22 and 27 are GPIO
+#e,23,24,KEY:KEY_UP-KEY_DOWN,4 "	# e=encoder, 23 and 24 are GPIO
+
+CMD = "sudo spd -v e,23,24,VOLU,2 b,25,KEY:KEY_SPACE,2,0,KEY:KEY_LEFTBRACE,250"	
 
 echo $CMD
 $CMD > /dev/null 2>&1 &
