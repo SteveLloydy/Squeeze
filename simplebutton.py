@@ -48,9 +48,11 @@ try:
 
 		clk_state = GPIO.input(CLK)
 		dt_state = GPIO.input(DT)
-		
-        # Detect rotation
+		# Detect rotation
 		if clk_state != last_clk_state:
+			print(f"Clock State {clk_state}")
+			print(f"DT State {dt_state}")
+		
 			if dt_state != clk_state:
 				counter += 1
 				direction = "CW"  # Clockwise
