@@ -64,7 +64,7 @@ LMS5=250
 #e,22,27,VOLU,2 \				# e=encoder, 22 and 27 are GPIO
 #e,23,24,KEY:KEY_UP-KEY_DOWN,4 "	# e=encoder, 23 and 24 are GPIO
 
-CMD = "sudo spd -v e,23,24,VOLU,2 b,25,KEY:KEY_SPACE,2,0,KEY:KEY_LEFTBRACE,250"	
+CMD = "sudo sbpd -v e,23,24,VOLU,2 b,25,KEY:KEY_SPACE,2,0,KEY:KEY_LEFTBRACE,250"	
 
 echo $CMD
 $CMD > /dev/null 2>&1 &
