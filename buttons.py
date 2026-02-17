@@ -14,6 +14,28 @@ from time import sleep
 
 import RPi.GPIO as GPIO
 
+try:
+	import paho.mqtt.client as mqtt
+except Exception as exc:
+	print("paho-mqtt not available. Install with: pip3 install paho-mqtt")
+	raise SystemExit(1) from exc
+
+# MQTT configuration
+MQTT_BROKER = "192.168.0.157"
+MQTT_PORT = 1883
+MQTT_TOPIC = "encoder/rotation"	
+
+# Initialize MQTT client with updated callback API
+mqtt_client = mqtt.Client()
+print(f"Connecting to MQTT broker at {MQTT_BROKER}:{MQTT_PORT}...")
+try:
+	mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
+	mqtt_client.loop_start()
+	print("MQTT connected")
+except Exception as e:
+	print(f"Failed to connect to MQTT broker: {e}")
+	mqtt_client = None
+
 SW = 25
 BTN = 26
 LED = 17
@@ -51,6 +73,7 @@ sleep(10)
 GPIO.output(LED, GPIO.LOW)
 
 GPIO.cleanup()
+
 
 
 
