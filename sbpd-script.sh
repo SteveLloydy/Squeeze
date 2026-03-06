@@ -65,7 +65,8 @@ LMS5=250
 #e,23,24,KEY:KEY_UP-KEY_DOWN,4 "	# e=encoder, 23 and 24 are GPIO
 
 #CMD="sudo sbpd -v b,25,KEY:KEY_C e,23,24,VOLU,2"
-CMD="sudo sbpd -v b,25,KEY:KEY_SPACE,1,0,KEY:KEY_LEFTBRACE,250 b,16,KEY:KEY_SPACE,2,0,KEY:KEY_LEFTBRACE,250 e,23,24,VOLU,2 "	
+#CMD="sudo sbpd -v b,25,KEY:KEY_SPACE,1,0,KEY:KEY_KEY_SPACE,250 b,16,KEY:KEY_SPACE,2,0,KEY:KEY_LEFTBRACE,250 e,23,24,VOLU,2 "	
+CMD="sudo sbpd -v b,25,KEY:KEY_SPACE,1,0,KEY:KEY_KEY_SPACE,250 e,23,24,VOLU,2 "	
 sudo chmod +x /home/tc/sbpd-script.sh
 echo $CMD
 $CMD > /dev/null 2>&1 &
