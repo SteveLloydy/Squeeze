@@ -61,7 +61,7 @@ def display_animation():
         rainbow_cycle()
         if (not run_animation):
             break
-     
+    print("Animation stopped, turning off LEDs.")
     pixels.fill((0, 0, 0))
     pixels.show()
 		
@@ -96,10 +96,14 @@ def wheel(pos):
         pos -= 170
         return (0, pos * 3, 255 - pos * 3)
 
+display_animation_thread = threading.Thread(target=display_animation, daemon=True)
+
 # ====== MAIN LOOP ======
 try:
     while True:
         if run_animation and run_animation != last_run:
+            if display_animation_thread.is_alive():
+                display_animation_thread.join(timeout=5)
             display_animation_thread = threading.Thread(target=display_animation, daemon=True)
             display_animation_thread.start()
         elif not run_animation and display_animation_thread.is_alive():
