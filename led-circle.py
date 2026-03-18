@@ -29,8 +29,9 @@ GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 # Background task function
 def background_loop():
     while True:
-        print("[Background] Loop is running...")
-        time.sleep(2)  # Simulate work
+        if GPIO.input(SW) == GPIO.HIGH:
+			print("Button SW Pressed!") 
+        time.sleep(0.05)  # Simulate work
 
 # Create and start a daemon thread
 thread = threading.Thread(target=background_loop, daemon=True)
