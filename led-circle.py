@@ -19,6 +19,8 @@ LED_PIN = board.D18    # GPIO pin (PWM-capable, e.g., GPIO18 on Raspberry Pi)
 BRIGHTNESS = 0.8       # Brightness (0.0 to 1.0)
 ORDER = neopixel.GRB   # Color order for most WS2812 LEDs
 
+adjustable_brightness = 256 * BRIGHTNESS
+
 CLK = 27
 DT = 22
 SW = 17
@@ -41,6 +43,8 @@ run_animation = False
 # Background task function
 def listen_for_switches():
     global run_animation
+    global pixels
+    global adjustable_brightness
     switchOn = True
     while True:
         if GPIO.input(SW) == GPIO.HIGH:
@@ -51,21 +55,26 @@ def listen_for_switches():
         else:
             switchOn = True
 
-		clk_state = GPIO.input(CLK)
-		dt_state = GPIO.input(DT)
+        clk_state = GPIO.input(CLK)
+        dt_state = GPIO.input(DT)
 		# Detect rotation
-		if clk_state != last_clk_state:
-			print(f"Clock State {clk_state}")
-			print(f"DT State {dt_state}")
-		
-			if dt_state != clk_state:
-				counter += 1
-				direction = "CW"  # Clockwise
-			else:
-				counter -= 1
-				direction = "CCW"  # Counter-clockwise
-			print(f"Direction:{direction}|Counter:{counter}")
-		last_clk_state = clk_state
+        if clk_state != last_clk_state:
+            print(f"Clock State {clk_state}")
+            print(f"DT State {dt_state}")
+            if dt_state != clk_state:
+                counter += 1
+                direction = "CW"  # Clockwise
+                adjustable_brightness += 5
+                pixels.setbrightness(adjustable_brightness)
+                pixels.show()
+            else:
+                counter -= 1
+                direction = "CCW"  # Counter-clockwise
+                adjustable_brightness -= 5
+                pixels.setbrightness(adjustable_brightness)
+                pixels.show()
+            print(f"Direction:{direction}|Counter:{counter}")
+            last_clk_state = clk_state
         time.sleep(0.1)
 
 def display_animation():
