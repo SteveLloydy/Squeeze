@@ -24,7 +24,7 @@ DT = 24
 SW = 21
 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-Sure
+
 # ====== INITIALIZE ======
 pixels = neopixel.NeoPixel(
     LED_PIN,
@@ -34,7 +34,7 @@ pixels = neopixel.NeoPixel(
     pixel_order=ORDER
 )
 
-run_animation = false
+run_animation = False
 
 # Background task function
 def listen_for_switches():
@@ -87,7 +87,7 @@ def wheel(pos):
 # ====== MAIN LOOP ======
 try:
     while True:
-        if run_animation && run_animation != last_run:
+        if run_animation and run_animation != last_run:
             display_animation_thread.start()
         last_run = run_animation
         time.sleep(0.05)
