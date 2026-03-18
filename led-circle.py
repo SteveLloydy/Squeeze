@@ -39,17 +39,28 @@ run_animation = False
 # Background task function
 def listen_for_switches():
     global run_animation
+    switchOn = True
     while True:
-        if GPIO.input(SW) == GPIO.HIGH:
+        if GPIO.input(SW) == GPIO.HIGH & switchOn:
+            switchOn = False
             run_animation = not run_animation
+        switchOn = True
         time.sleep(0.1)
 
 def display_animation():
     while True:
         color_wipe((255, 0, 0))  # Red
+        if (not run_animation):
+            break
         color_wipe((0, 255, 0))  # Green
+        if (not run_animation):
+            break
         color_wipe((0, 0, 255))  # Blue
+        if (not run_animation):
+            break
         rainbow_cycle()
+        if (not run_animation):
+            break
 		
 # Create and start a daemon thread
 listen_for_switches_thread = threading.Thread(target=listen_for_switches, daemon=True)
@@ -90,6 +101,11 @@ try:
     while True:
         if run_animation and run_animation != last_run:
             display_animation_thread.start()
+        elif not run_animation and display_animation_thread.is_alive():
+            # Stop the animation thread if it's running
+            # Note: In Python, threads cannot be forcefully stopped, so we rely on the run_animation flag
+            pixels.fill((0, 0, 0))
+            pixels.show()
         last_run = run_animation
         time.sleep(0.05)
 except KeyboardInterrupt:
