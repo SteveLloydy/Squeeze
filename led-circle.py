@@ -24,6 +24,8 @@ DT = 22
 SW = 17
 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
+GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
 
 # ====== INITIALIZE ======
 pixels = neopixel.NeoPixel(
@@ -48,6 +50,22 @@ def listen_for_switches():
                 run_animation = not run_animation
         else:
             switchOn = True
+
+		clk_state = GPIO.input(CLK)
+		dt_state = GPIO.input(DT)
+		# Detect rotation
+		if clk_state != last_clk_state:
+			print(f"Clock State {clk_state}")
+			print(f"DT State {dt_state}")
+		
+			if dt_state != clk_state:
+				counter += 1
+				direction = "CW"  # Clockwise
+			else:
+				counter -= 1
+				direction = "CCW"  # Counter-clockwise
+			print(f"Direction:{direction}|Counter:{counter}")
+		last_clk_state = clk_state
         time.sleep(0.1)
 
 def display_animation():
