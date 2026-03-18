@@ -41,10 +41,13 @@ def listen_for_switches():
     global run_animation
     switchOn = True
     while True:
-        if GPIO.input(SW) == GPIO.HIGH & switchOn:
-            switchOn = False
-            run_animation = not run_animation
-        switchOn = True
+        if GPIO.input(SW) == GPIO.HIGH:
+            if (switchOn):
+                print("Switch SW Pressed!")
+                switchOn = False
+                run_animation = not run_animation
+        else:
+            switchOn = True
         time.sleep(0.1)
 
 def display_animation():
