@@ -11,7 +11,7 @@ import neopixel
 # ====== CONFIGURATION ======
 LED_COUNT = 24          # Number of NeoPixels
 LED_PIN = board.D18    # GPIO pin (PWM-capable, e.g., GPIO18 on Raspberry Pi)
-BRIGHTNESS = 0.2       # Brightness (0.0 to 1.0)
+BRIGHTNESS = 0.8       # Brightness (0.0 to 1.0)
 ORDER = neopixel.GRB   # Color order for most WS2812 LEDs
 
 # ====== INITIALIZE ======
@@ -23,14 +23,14 @@ pixels = neopixel.NeoPixel(
     pixel_order=ORDER
 )
 
-def color_wipe(color, wait=0.05):
+def color_wipe(color, wait=0.5):
     """Fill the strip with a single color, one pixel at a time."""
     for i in range(LED_COUNT):
         pixels[i] = color
         pixels.show()
         time.sleep(wait)
 
-def rainbow_cycle(wait=0.02):
+def rainbow_cycle(wait=0.2):
     """Draw rainbow that uniformly distributes across all pixels."""
     for j in range(255):
         for i in range(LED_COUNT):
@@ -54,6 +54,7 @@ def wheel(pos):
 try:
     print ("running")
     while True:
+        print ("looping")
         color_wipe((255, 0, 0))  # Red
         color_wipe((0, 255, 0))  # Green
         color_wipe((0, 0, 255))  # Blue
