@@ -53,6 +53,9 @@ def wheel(pos):
 # ====== MAIN LOOP ======
 try:
     print ("running")
+    pixels[1] = (255, 0, 0)
+    time.sleep(1)
+    pixels[1] = (0, 0, 0)
     while True:
         print ("looping")
         color_wipe((255, 0, 0))  # Red
