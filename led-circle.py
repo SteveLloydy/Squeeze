@@ -9,7 +9,7 @@ import board
 import neopixel
 
 # ====== CONFIGURATION ======
-LED_COUNT = 8          # Number of NeoPixels
+LED_COUNT = 24          # Number of NeoPixels
 LED_PIN = board.D18    # GPIO pin (PWM-capable, e.g., GPIO18 on Raspberry Pi)
 BRIGHTNESS = 0.2       # Brightness (0.0 to 1.0)
 ORDER = neopixel.GRB   # Color order for most WS2812 LEDs
@@ -52,6 +52,7 @@ def wheel(pos):
 
 # ====== MAIN LOOP ======
 try:
+    print ("running")
     while True:
         color_wipe((255, 0, 0))  # Red
         color_wipe((0, 255, 0))  # Green
