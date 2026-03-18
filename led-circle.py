@@ -23,14 +23,14 @@ pixels = neopixel.NeoPixel(
     pixel_order=ORDER
 )
 
-def color_wipe(color, wait=0.5):
+def color_wipe(color, wait=0.05):
     """Fill the strip with a single color, one pixel at a time."""
     for i in range(LED_COUNT):
         pixels[i] = color
         pixels.show()
         time.sleep(wait)
 
-def rainbow_cycle(wait=0.2):
+def rainbow_cycle(wait=0.02):
     """Draw rainbow that uniformly distributes across all pixels."""
     for j in range(255):
         for i in range(LED_COUNT):
@@ -54,6 +54,7 @@ def wheel(pos):
 try:
     print ("running")
     pixels[1] = (255, 0, 0)
+    print ("showing")
     pixels.show()
     time.sleep(1)
     pixels[1] = (0, 0, 0)
