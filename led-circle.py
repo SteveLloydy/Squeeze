@@ -19,6 +19,8 @@ LED_PIN = board.D21    # GPIO pin (PWM-capable, e.g., GPIO18 on Raspberry Pi)
 BRIGHTNESS = 0.8       # Brightness (0.0 to 1.0)
 ORDER = neopixel.GRB   # Color order for most WS2812 LEDs
 
+print(f"Imported GPIO and NeoPixel on pin {LED_PIN} with {LED_COUNT} LEDs at brightness {BRIGHTNESS}")
+
 adjustable_brightness = 256 * BRIGHTNESS
 
 CLK = 27
