@@ -24,19 +24,7 @@ DT = 24
 SW = 21
 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-
-
-# Background task function
-def background_loop():
-    while True:
-        if GPIO.input(SW) == GPIO.HIGH:
-            print("Button SW Pressed!")
-        time.sleep(0.05)
-		
-# Create and start a daemon thread
-thread = threading.Thread(target=background_loop, daemon=True)
-thread.start()
-
+Sure
 # ====== INITIALIZE ======
 pixels = neopixel.NeoPixel(
     LED_PIN,
@@ -45,6 +33,29 @@ pixels = neopixel.NeoPixel(
     auto_write=False,
     pixel_order=ORDER
 )
+
+run_animation = false
+
+# Background task function
+def listen_for_switches():
+    while True:
+        if GPIO.input(SW) == GPIO.HIGH:
+            run_animation = not run_animation
+        time.sleep(0.1)
+
+def display_animation():
+    while True:
+        color_wipe((255, 0, 0))  # Red
+        color_wipe((0, 255, 0))  # Green
+        color_wipe((0, 0, 255))  # Blue
+        rainbow_cycle()
+		
+# Create and start a daemon thread
+listen_for_switches_thread = threading.Thread(target=listen_for_switches, daemon=True)
+listen_for_switches_thread.start()
+
+display_animation_thread = threading.Thread(target=display_animation, daemon=True)
+
 
 def color_wipe(color, wait=0.05):
     """Fill the strip with a single color, one pixel at a time."""
@@ -75,11 +86,11 @@ def wheel(pos):
 
 # ====== MAIN LOOP ======
 try:
-    while True:        
-        color_wipe((255, 0, 0))  # Red
-        color_wipe((0, 255, 0))  # Green
-        color_wipe((0, 0, 255))  # Blue
-        rainbow_cycle()
+    while True:
+		if run_animation && run_animation != last_run:
+		    display_animation_thread.start()
+		last_run = run_animation
+        time.sleep(0.05)
 except KeyboardInterrupt:
     # Turn off LEDs on exit
     pixels.fill((0, 0, 0))
