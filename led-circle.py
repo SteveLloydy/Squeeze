@@ -87,9 +87,9 @@ def wheel(pos):
 # ====== MAIN LOOP ======
 try:
     while True:
-		if run_animation && run_animation != last_run:
-		    display_animation_thread.start()
-		last_run = run_animation
+        if run_animation && run_animation != last_run:
+            display_animation_thread.start()
+        last_run = run_animation
         time.sleep(0.05)
 except KeyboardInterrupt:
     # Turn off LEDs on exit
