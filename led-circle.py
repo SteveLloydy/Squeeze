@@ -6,13 +6,35 @@ Tested with WS2812B LEDs.
 
 import time
 import board
+import threading
+import time
+
 import neopixel
+import argparse
+import RPi.GPIO as GPIO
 
 # ====== CONFIGURATION ======
 LED_COUNT = 24          # Number of NeoPixels
 LED_PIN = board.D18    # GPIO pin (PWM-capable, e.g., GPIO18 on Raspberry Pi)
 BRIGHTNESS = 0.8       # Brightness (0.0 to 1.0)
 ORDER = neopixel.GRB   # Color order for most WS2812 LEDs
+
+CLK = 23
+DT = 24
+SW = 21
+
+GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+
+# Background task function
+def background_loop():
+    while True:
+        print("[Background] Loop is running...")
+        time.sleep(2)  # Simulate work
+
+# Create and start a daemon thread
+thread = threading.Thread(target=background_loop, daemon=True)
+thread.start()
 
 # ====== INITIALIZE ======
 pixels = neopixel.NeoPixel(
@@ -52,15 +74,7 @@ def wheel(pos):
 
 # ====== MAIN LOOP ======
 try:
-    print ("running")
-    pixels[1] = (255, 0, 0)
-    print ("showing")
-    pixels.show()
-    time.sleep(1)
-    pixels[1] = (0, 0, 0)
-    pixels.show()
-    while True:
-        print ("looping")
+    while True:        
         color_wipe((255, 0, 0))  # Red
         color_wipe((0, 255, 0))  # Green
         color_wipe((0, 0, 255))  # Blue
@@ -69,3 +83,4 @@ except KeyboardInterrupt:
     # Turn off LEDs on exit
     pixels.fill((0, 0, 0))
     pixels.show()
+    GPIO.cleanup()
