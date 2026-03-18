@@ -64,18 +64,16 @@ def listen_for_switches():
             print(f"Clock State {clk_state}")
             print(f"DT State {dt_state}")
             if dt_state != clk_state:
-                counter += 1
                 direction = "CW"  # Clockwise
                 adjustable_brightness += 5
                 pixels.setbrightness(adjustable_brightness)
                 pixels.show()
             else:
-                counter -= 1
                 direction = "CCW"  # Counter-clockwise
                 adjustable_brightness -= 5
                 pixels.setbrightness(adjustable_brightness)
                 pixels.show()
-            print(f"Direction:{direction}|Counter:{counter}")
+            print(f"Direction:{direction}|Brightness:{adjustable_brightness}")
             last_clk_state = clk_state
         time.sleep(0.1)
 
