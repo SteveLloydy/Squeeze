@@ -46,6 +46,7 @@ def listen_for_switches():
     global pixels
     global adjustable_brightness
     switchOn = True
+    last_clk_state = GPIO.input(CLK)
     while True:
         if GPIO.input(SW) == GPIO.HIGH:
             if (switchOn):
@@ -57,6 +58,7 @@ def listen_for_switches():
 
         clk_state = GPIO.input(CLK)
         dt_state = GPIO.input(DT)
+        
 		# Detect rotation
         if clk_state != last_clk_state:
             print(f"Clock State {clk_state}")
