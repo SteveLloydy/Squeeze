@@ -38,6 +38,7 @@ run_animation = False
 
 # Background task function
 def listen_for_switches():
+    global run_animation
     while True:
         if GPIO.input(SW) == GPIO.HIGH:
             run_animation = not run_animation
