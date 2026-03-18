@@ -105,11 +105,7 @@ try:
             if display_animation_thread.is_alive():
                 display_animation_thread.join(timeout=5)
             display_animation_thread = threading.Thread(target=display_animation, daemon=True)
-            display_animation_thread.start()
-        elif not run_animation and display_animation_thread.is_alive():
-            # Stop the animation thread if it's running
-            # Note: In Python, threads cannot be forcefully stopped, so we rely on the run_animation flag
-            display_animation_thread.join(timeout=0.1) # Wait briefly for the thread to finish
+            display_animation_thread.start()        
            
         last_run = run_animation
         time.sleep(0.05)
