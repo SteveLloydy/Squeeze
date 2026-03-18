@@ -19,9 +19,9 @@ LED_PIN = board.D18    # GPIO pin (PWM-capable, e.g., GPIO18 on Raspberry Pi)
 BRIGHTNESS = 0.8       # Brightness (0.0 to 1.0)
 ORDER = neopixel.GRB   # Color order for most WS2812 LEDs
 
-CLK = 23
-DT = 24
-SW = 21
+CLK = 27
+DT = 22
+SW = 17
 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
