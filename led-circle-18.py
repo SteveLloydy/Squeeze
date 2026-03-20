@@ -86,15 +86,20 @@ def listen_for_switches():
 
 def display_animation():
     while True:
+        print("Animation running")
+        print("colour wipe red")
         color_wipe((255, 0, 0))  # Red
         if (not run_animation):
             break
+        print("colour wipe green")
         color_wipe((0, 255, 0))  # Green
         if (not run_animation):
             break
+        print("colour wipe blue")
         color_wipe((0, 0, 255))  # Blue
         if (not run_animation):
             break
+        print
         rainbow_cycle()
         if (not run_animation):
             break
@@ -148,6 +153,7 @@ try:
         time.sleep(0.05)
 except KeyboardInterrupt:
     # Turn off LEDs on exit
+    print("KeyboardInterrupt received, stopping animation and cleaning up GPIO...")
     pixels.fill((0, 0, 0))
     pixels.show()
     run_animation = False
