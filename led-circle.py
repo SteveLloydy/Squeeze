@@ -30,6 +30,7 @@ SW = 11
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
 GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
+print(f"GPIO setup complete, CLK={CLK}, DT={DT}, SW={SW}")
 
 # ====== INITIALIZE ======
 pixels = neopixel.NeoPixel(
@@ -39,6 +40,9 @@ pixels = neopixel.NeoPixel(
     auto_write=False,
     pixel_order=ORDER
 )
+
+pixels.fill((0, 0, 0))
+pixels.show()
 
 run_animation = False
 
@@ -146,4 +150,8 @@ except KeyboardInterrupt:
     # Turn off LEDs on exit
     pixels.fill((0, 0, 0))
     pixels.show()
+    run_animation = False
+    while display_animation_thread.is_alive():
+        print("Waiting for animation thread to finish...")        
+        time.sleep(1)        
     GPIO.cleanup()
