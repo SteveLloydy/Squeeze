@@ -23,8 +23,8 @@ print(f"Imported GPIO and NeoPixel on pin {LED_PIN} with {LED_COUNT} LEDs at bri
 
 adjustable_brightness = BRIGHTNESS
 
-CLK = 9
-DT = 10
+CLK = 10
+DT = 9
 SW = 11
 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -82,7 +82,7 @@ def listen_for_switches():
                 pixels.show()
             print(f"Direction:{direction}|Brightness:{adjustable_brightness}")
             last_clk_state = clk_state
-        time.sleep(0.5)
+        time.sleep(0.05)
 
 def display_animation():
     while True:
