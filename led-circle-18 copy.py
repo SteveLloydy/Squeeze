@@ -15,13 +15,13 @@ import RPi.GPIO as GPIO
 
 # ====== CONFIGURATION ======
 LED_COUNT = 24          # Number of NeoPixels
-LED_PIN = board.D12    # GPIO pin (PWM-capable, e.g., GPIO18 on Raspberry Pi)
+LED_PIN = board.D18    # GPIO pin (PWM-capable, e.g., GPIO18 on Raspberry Pi)
 BRIGHTNESS = 0.8       # Brightness (0.0 to 1.0)
 ORDER = neopixel.GRB   # Color order for most WS2812 LEDs
 
 print(f"Imported GPIO and NeoPixel on pin {LED_PIN} with {LED_COUNT} LEDs at brightness {BRIGHTNESS}")
 
-adjustable_brightness = BRIGHTNESS
+adjustable_brightness = 256 * BRIGHTNESS
 
 CLK = 9
 DT = 10
@@ -59,6 +59,7 @@ def listen_for_switches():
                 print("Switch SW Pressed!")
                 switchOn = False
                 run_animation = not run_animation
+                time.sleep(0.5)  # Debounce delay
         else:
             switchOn = True
 
@@ -72,13 +73,13 @@ def listen_for_switches():
             print(f"DT State {dt_state}")
             if dt_state != clk_state:
                 direction = "CW"  # Clockwise
-                adjustable_brightness += 0.05
-                pixels.brightness(adjustable_brightness)
+                adjustable_brightness += 10
+                pixels.setBrightness(adjustable_brightness)
                 pixels.show()
             else:
                 direction = "CCW"  # Counter-clockwise
-                adjustable_brightness -= 5
-                pixels.brightness(adjustable_brightness)
+                adjustable_brightness -= 10
+                pixels.setBrightness(adjustable_brightness)
                 pixels.show()
             print(f"Direction:{direction}|Brightness:{adjustable_brightness}")
             last_clk_state = clk_state
@@ -86,15 +87,20 @@ def listen_for_switches():
 
 def display_animation():
     while True:
+        print("Animation running")
+        print("colour wipe red")
         color_wipe((255, 0, 0))  # Red
         if (not run_animation):
             break
+        print("colour wipe green")
         color_wipe((0, 255, 0))  # Green
         if (not run_animation):
             break
+        print("colour wipe blue")
         color_wipe((0, 0, 255))  # Blue
         if (not run_animation):
             break
+        print
         rainbow_cycle()
         if (not run_animation):
             break
@@ -148,6 +154,7 @@ try:
         time.sleep(0.05)
 except KeyboardInterrupt:
     # Turn off LEDs on exit
+    print("KeyboardInterrupt received, stopping animation and cleaning up GPIO...")
     pixels.fill((0, 0, 0))
     pixels.show()
     run_animation = False
