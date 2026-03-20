@@ -23,9 +23,9 @@ print(f"Imported GPIO and NeoPixel on pin {LED_PIN} with {LED_COUNT} LEDs at bri
 
 adjustable_brightness = 256 * BRIGHTNESS
 
-CLK = 27
-DT = 22
-SW = 17
+CLK = 9
+DT = 10
+SW = 11
 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
