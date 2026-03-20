@@ -16,7 +16,7 @@ import RPi.GPIO as GPIO
 # ====== CONFIGURATION ======
 LED_COUNT = 24          # Number of NeoPixels
 LED_PIN = board.D12    # GPIO pin (PWM-capable, e.g., GPIO18 on Raspberry Pi)
-BRIGHTNESS = 0.8       # Brightness (0.0 to 1.0)
+BRIGHTNESS = 0.1       # Brightness (0.0 to 1.0)
 ORDER = neopixel.GRB   # Color order for most WS2812 LEDs
 
 print(f"Imported GPIO and NeoPixel on pin {LED_PIN} with {LED_COUNT} LEDs at brightness {BRIGHTNESS}")
@@ -68,7 +68,6 @@ def listen_for_switches():
 		# Detect rotation
         if clk_state != last_clk_state:
             print(f"Clock State {clk_state}")
-            print(f"Last Clock State {last_clk_state}")
             print(f"DT State {dt_state}")
             if dt_state != clk_state:
                 direction = "CW"  # Clockwise
