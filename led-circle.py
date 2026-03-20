@@ -26,8 +26,8 @@ adjustable_brightness = BRIGHTNESS
 CLK = 10
 DT = 9
 SW = 11
-
-GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+SW2 = 7
+GPIO.setup(SW2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
@@ -67,7 +67,7 @@ def listen_for_switches():
         else:
             switchOn = True
 
-        if GPIO.input(16) == GPIO.HIGH:
+        if GPIO.input(SW2) == GPIO.HIGH:
             if (switch2On):
                 print("Switch 2 Pressed!")
                 switchOn = False
