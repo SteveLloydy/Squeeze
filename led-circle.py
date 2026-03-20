@@ -73,12 +73,12 @@ def listen_for_switches():
             if dt_state != clk_state:
                 direction = "CW"  # Clockwise
                 adjustable_brightness += 0.05
-                pixels.brightness(adjustable_brightness)
+                pixels.brightness = adjustable_brightness
                 pixels.show()
             else:
                 direction = "CCW"  # Counter-clockwise
-                adjustable_brightness -= 5
-                pixels.brightness(adjustable_brightness)
+                adjustable_brightness -= 0.05
+                pixels.brightness = adjustable_brightness
                 pixels.show()
             print(f"Direction:{direction}|Brightness:{adjustable_brightness}")
             last_clk_state = clk_state
