@@ -27,6 +27,8 @@ CLK = 10
 DT = 9
 SW = 11
 
+GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
 GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
@@ -43,7 +45,9 @@ pixels = neopixel.NeoPixel(
 
 pixels.fill((0, 0, 0))
 pixels.show()
+colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
 
+colorindex=0
 run_animation = False
 
 # Background task function
@@ -52,15 +56,28 @@ def listen_for_switches():
     global pixels
     global adjustable_brightness
     switchOn = True
+    switc2hOn = True
     last_clk_state = GPIO.input(CLK)
     while True:
         if GPIO.input(SW) == GPIO.HIGH:
             if (switchOn):
                 print("Switch SW Pressed!")
                 switchOn = False
-                run_animation = not run_animation
+                run_animation = not run_animation            
         else:
             switchOn = True
+
+        if GPIO.input(16) == GPIO.HIGH:
+            if (switch2On):
+                print("Switch 2 Pressed!")
+                switchOn = False
+                run_animation = False
+                pixels.fill(colors[colorindex % len(colors)])
+                time.sleep(0.5)
+                pixels.show()
+                colorindex += 1
+        else:
+            switch2On = True
 
         clk_state = GPIO.input(CLK)
         dt_state = GPIO.input(DT)
@@ -108,6 +125,9 @@ listen_for_switches_thread.start()
 def color_wipe(color, wait=0.05):
     """Fill the strip with a single color, one pixel at a time."""
     for i in range(LED_COUNT):
+        if (not run_animation):
+            return
+            
         pixels[i] = color
         pixels.show()
         time.sleep(wait)
@@ -116,6 +136,8 @@ def rainbow_cycle(wait=0.02):
     """Draw rainbow that uniformly distributes across all pixels."""
     for j in range(255):
         for i in range(LED_COUNT):
+            if (not run_animation):
+                return
             pixel_index = (i * 256 // LED_COUNT) + j
             pixels[i] = wheel(pixel_index & 255)
         pixels.show()
@@ -144,7 +166,7 @@ try:
             display_animation_thread.start()        
            
         last_run = run_animation
-        time.sleep(0.05)
+        time.sleep(0.1)
 except KeyboardInterrupt:
     # Turn off LEDs on exit
     pixels.fill((0, 0, 0))
