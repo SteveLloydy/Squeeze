@@ -27,13 +27,17 @@ CLK = 10
 DT = 9
 SW = 11
 SW2 = 7
+CLK2 = 8
+DT2 = 16
 GPIO.setup(SW2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(CLK2, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
+GPIO.setup(DT2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
 GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
 print(f"Dial 1 setup complete, CLK={CLK}, DT={DT}, SW={SW}")
-print(f"Dial 2 setup complete, CLK={CLK}, DT={DT}, SW={SW2}")
+print(f"Dial 2 setup complete, CLK={CLK2}, DT={DT2}, SW={SW2}")
 
 # ====== INITIALIZE ======
 pixels = neopixel.NeoPixel(
@@ -48,7 +52,6 @@ pixels.fill((0, 0, 0))
 pixels.show()
 colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
 
-colorindex=0
 run_animation = False
 
 # Background task function
@@ -57,7 +60,8 @@ def listen_for_switches():
     global pixels
     global adjustable_brightness
     switchOn = True
-    switc2hOn = True
+    switch2On = True
+    colorindex=0
     last_clk_state = GPIO.input(CLK)
     while True:
         if GPIO.input(SW) == GPIO.HIGH:
