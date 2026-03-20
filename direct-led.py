@@ -134,7 +134,7 @@ def wheel(pos):
         return (0, pos * 3, 255 - pos * 3)
 
 display_animation_thread = threading.Thread(target=display_animation, daemon=True)
-last_run = run_animation
+last_run = not run_animation
 # ====== MAIN LOOP ======
 try:
     while True:
