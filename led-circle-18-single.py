@@ -47,10 +47,13 @@ pixels.show()
 # ====== MAIN LOOP ======
 try:
     while True:
+        print("Displaying red")
         pixels.fill((255, 0, 0))
         time.sleep(3)
+        print("Displaying green")       
         pixels.fill((0, 255, 0))
         time.sleep(3)
+        print("Displaying blue")    
         pixels.fill((0, 0, 255))
         time.sleep(3)
 except KeyboardInterrupt:
