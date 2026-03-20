@@ -15,7 +15,7 @@ import RPi.GPIO as GPIO
 
 # ====== CONFIGURATION ======
 LED_COUNT = 24          # Number of NeoPixels
-LED_PIN = board.D13    # GPIO pin (PWM-capable, e.g., GPIO18 on Raspberry Pi)
+LED_PIN = board.D10    # GPIO pin (PWM-capable, e.g., GPIO18 on Raspberry Pi)
 BRIGHTNESS = 0.8       # Brightness (0.0 to 1.0)
 ORDER = neopixel.GRB   # Color order for most WS2812 LEDs
 
