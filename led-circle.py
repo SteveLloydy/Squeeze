@@ -32,7 +32,8 @@ GPIO.setup(SW2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
 GPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
-print(f"GPIO setup complete, CLK={CLK}, DT={DT}, SW={SW}")
+print(f"Dial 1 setup complete, CLK={CLK}, DT={DT}, SW={SW}")
+print(f"Dial 2 setup complete, CLK={CLK}, DT={DT}, SW={SW2}")
 
 # ====== INITIALIZE ======
 pixels = neopixel.NeoPixel(
