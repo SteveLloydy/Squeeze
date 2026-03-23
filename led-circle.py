@@ -89,6 +89,24 @@ def listen_for_switches():
         
 		# Detect rotation
         if clk_state != last_clk_state:
+            print(f"Clock State 2 {clk_state}")
+            print(f"DT State 2 {dt_state}")
+            if clk_state == 1 and dt_state == 0:
+                direction = "CW"  # Clockwise
+                adjustable_brightness += 0.05
+                pixels.brightness = adjustable_brightness
+                pixels.show()
+            elif clk_state == 0 and dt_state == 0:
+                direction = "CCW"  # Counter-clockwise
+                adjustable_brightness -= 0.05
+                pixels.brightness = adjustable_brightness
+                pixels.show()
+            print(f"Direction 2:{direction}|Brightness 2:{adjustable_brightness}")
+            last_clk_state = clk_state
+        time.sleep(0.05)
+
+
+        if clk_state != last_clk_state:
             print(f"Clock State {clk_state}")
             print(f"DT State {dt_state}")
             if dt_state != clk_state:
