@@ -88,9 +88,11 @@ def listen_for_switches():
         dt_state = GPIO.input(DT)
         
 		# Detect rotation
+        print("Using new alogorythum")
         if clk_state != last_clk_state:
             print(f"Clock State 2 {clk_state}")
             print(f"DT State 2 {dt_state}")
+            direction = "None"
             if clk_state == 1 and dt_state == 0:
                 direction = "CW"  # Clockwise
                 adjustable_brightness += 0.05
