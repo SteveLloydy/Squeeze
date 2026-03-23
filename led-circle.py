@@ -87,8 +87,7 @@ def listen_for_switches():
         clk_state = GPIO.input(CLK)
         dt_state = GPIO.input(DT)
         
-		# Detect rotation
-        print("Using new alogorythum")
+		# Detect rotation        
         if clk_state != last_clk_state:
             print(f"Clock State 2 {clk_state}")
             print(f"DT State 2 {dt_state}")
